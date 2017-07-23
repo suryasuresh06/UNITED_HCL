@@ -1,2 +1,1 @@
-# UNITED_HCL
-This repository contains our submission for the 2017 United HCL Hackathon
+# My very first Hyperledger Composer Network
