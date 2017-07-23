@@ -1,0 +1,101 @@
+/**
+ * Sample business network definition.
+ */
+namespace org.acme.mynetwork
+enum IssuebyIB {
+  o Pending
+  o Done
+}
+enum ApprovalbyAB {
+  o Pending
+  o Done
+}
+enum Sellerupload {
+  o Pending
+  o Done
+}
+enum ComplibyNB {
+  o Pending
+  o Done
+}
+enum ComplibyIB {
+  o Pending
+  o Done
+}
+enum DoctoBuyer {
+  o Pending
+  o Done
+}
+enum SellerDocupNotification {
+  o Yet_to_be_notified 
+  o Notified_to_upload
+}
+
+asset LOC identified by LOCId {
+  o String LOCId
+  o IssuebyIB iibtype
+  o ApprovalbyAB aabtype
+  o SellerDocupNotification selnottype
+  o Sellerupload edutype
+  o ComplibyNB ccnbtype
+  o ComplibyIB ccibtype
+  o DoctoBuyer dtbtype
+  o Double amount
+  -->IssuingBank ib
+  -->NominatedBank nb
+  -->AdvisingBank ab
+  -->Seller seller
+  -->Buyer buyer
+  
+}
+abstract participant member identified by email {
+  o String email
+  o String name
+  o Double balance
+}
+participant IssuingBank extends member {
+} 
+participant NominatedBank extends member {
+}
+participant AdvisingBank extends member {
+}
+participant Buyer extends member {
+}
+participant Seller extends member {
+}
+ 
+transaction IBissue{
+  o String txId
+  -->LOC loc
+}
+
+transaction ABapproval{
+  o String txId
+  -->LOC loc
+}
+
+transaction Sellerdocup{
+  o String txId
+  -->LOC loc
+}
+
+transaction NBcompli{
+  o String txId
+  -->LOC loc
+  -->IssuingBank ib
+  -->Seller seller
+   
+}
+
+transaction IBcompli{
+  o String txId
+  -->LOC loc
+}
+
+transaction Buyerdocrec{
+  o String txId
+  -->IssuingBank ib
+  -->Buyer buyer
+  -->LOC loc
+}
+
